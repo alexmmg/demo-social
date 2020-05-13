@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import Header from './components/Header'
-import Navbar from './components/Navbar'
+import Header from './components/Header/Header'
+import Navbar from './components/Navbar/Navbar'
 import './App.css';
-import Profile from "./components/Profile";
+// import MyPosts from "./components/Profile/MyPosts/MyPosts";
+import Profile from "./components/Profile/Profile";
 
 class App extends Component {
     render() {
@@ -10,8 +11,7 @@ class App extends Component {
             <div className='app-wrapper'>
                 <Header />
                 <Navbar />
-                <Profile/>
-                222222222222222222222222222222222222222222222222222222222
+                <Profile />
             </div>
         );
     }
