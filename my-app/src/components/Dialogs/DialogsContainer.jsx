@@ -1,19 +1,25 @@
 import React from "react";
-import s from "./Dialogs.module.css";
-import DialogItem from "./DialogItem/DialogItem";
-import Message from "./Message/Message";
-import WriteMessage from "./Message/WriteMessage/WriteMessage"
-import MyPosts from "../Profile/MyPosts/MyPosts";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogsReducer";
+import Dialogs from "./Dialogs";
 
 
-const Dialogs = (props) => {
+const DialogsContainer = (props) => {
 debugger
-    let dialogs = props.state.dialogs.map( (dialog) => ( <DialogItem name = {dialog.name} id = {dialog.id} />));
-    let message = props.state.messages.map( (message) => ( <Message text = {message.message} />));
+
+    let state = props.store.getState().dialogPage;
+
+    let onAddMessageClick = () => {
+        props.store.dispatch(addMessageActionCreator());
+    };
+
+    let onMessageChange = (text) => {
+        props.store.dispatch(updateNewMessageTextActionCreator(text));
+    };
 
     return (
-        <Dialogs />
+        <Dialogs addMessage={onAddMessageClick} updateNewMessageText={onMessageChange}
+                 state={state} newMessageText={state.newMessageText}/>
     )
 };
 
-export default Dialogs;
+export default DialogsContainer;

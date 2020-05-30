@@ -2,14 +2,24 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import WriteMessage from "./Message/WriteMessage/WriteMessage"
-import MyPosts from "../Profile/MyPosts/MyPosts";
 
 
 const Dialogs = (props) => {
-debugger
+    debugger
+
     let dialogs = props.state.dialogs.map( (dialog) => ( <DialogItem name = {dialog.name} id = {dialog.id} />));
     let message = props.state.messages.map( (message) => ( <Message text = {message.message} />));
+
+    let messageText = React.createRef();
+
+    let addMessage = () => {
+        props.addMessage();
+    };
+
+    let onMessageChange = () => {
+        let text = messageText.current.value;
+        props.updateNewMessageText(text);
+    };
 
     return (
         <div>
@@ -21,7 +31,14 @@ debugger
                     { message }
                 </div>
             </div>
-            <WriteMessage newMessageText={props.state.newMessageText} dispatch={props.dispatch} />
+            <div>
+                <div>
+                    <textarea ref={messageText} value={props.newMessageText} onChange={onMessageChange}></textarea>
+                </div>
+                <div>
+                    <button onClick={addMessage}>Write Message</button>
+                </div>
+            </div>
         </div>
     )
 };
