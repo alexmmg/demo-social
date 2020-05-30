@@ -2,10 +2,8 @@ import React from "react";
 import s from "./WriteMessage.module.css";
 import {
     addMessageActionCreator,
-    addPostActionCreator,
     updateNewMessageTextActionCreator,
-    updateNewPostTextActionCreator
-} from "../../../../redux/state";
+} from "../../../../redux/dialogsReducer";
 // import DialogItem from "./DialogItem/DialogItem";
 // import Message from "./Message/Message";
 
@@ -25,7 +23,6 @@ const WriteMessage = (props) => {
     };
 
     let onMessageChange = () => {
-        debugger
         let text = messageText.current.value;
         props.dispatch(updateNewMessageTextActionCreator(text));
     };

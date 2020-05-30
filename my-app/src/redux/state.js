@@ -1,10 +1,14 @@
-const ADD_POST = 'ADD-POST';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const ADD_POST = 'ADD-POST';
+//
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const ADD_MESSAGE = 'ADD-MESSAGE';
-
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+// const ADD_MESSAGE = 'ADD-MESSAGE';
+//
+// const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 
 let store = {
@@ -62,58 +66,44 @@ let store = {
     getState() {
         return this._state;
     },
-    // addPost() {
-    //     let newPost = {
-    //         title: this._state.profilePage.newPostText,
-    //         src: "https://s3.tproger.ru/uploads/2020/05/IMG_8715-50x50.png",
-    //         likesCount: '0'
-    //     };
-    //     this._state.profilePage.posts.push(newPost);
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
-    // },
-    // updateNewPostText(newText) {
-    //     this._state.profilePage.newPostText = newText;
-    //     this._callSubscriber(this._state);
-    // },
     subscribe(observer) {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {
-                title: this._state.profilePage.newPostText,
-                src: "https://s3.tproger.ru/uploads/2020/05/IMG_8715-50x50.png",
-                likesCount: '0'
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === ADD_MESSAGE) {
-            let newMessage = {
-                id: '5',
-                message: this._state.dialogPage.newMessageText
-            };
-            this._state.dialogPage.messages.push(newMessage);
-            this._state.dialogPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-            this._state.dialogPage.newMessageText = action.newText;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+
+        this._callSubscriber(this._state);
+        // if (action.type === ADD_POST) {
+        //     let newPost = {
+        //         title: this._state.profilePage.newPostText,
+        //         src: "https://s3.tproger.ru/uploads/2020/05/IMG_8715-50x50.png",
+        //         likesCount: '0'
+        //     };
+        //     this._state.profilePage.posts.push(newPost);
+        //     this._state.profilePage.newPostText = '';
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === UPDATE_NEW_POST_TEXT) {
+        //     this._state.profilePage.newPostText = action.newText;
+
+        // }
+
+        // if (action.type === ADD_MESSAGE) {
+        //     let newMessage = {
+        //         id: '5',
+        //         message: this._state.dialogPage.newMessageText
+        //     };
+        //     this._state.dialogPage.messages.push(newMessage);
+        //     this._state.dialogPage.newMessageText = '';
+        //     this._callSubscriber(this._state);
+        // } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+        //     this._state.dialogPage.newMessageText = action.newText;
+        //     this._callSubscriber(this._state);
+        // }
     }
 };
 
-export let addPostActionCreator = () => ({type: ADD_POST});
-
-export let updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
-
-export let addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export let updateNewMessageTextActionCreator = (text) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text});
 
 export default store;
 
