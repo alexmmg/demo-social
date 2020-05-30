@@ -5,18 +5,18 @@ import './App.css';
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
-import {updateNewPostText} from "./redux/state";
 
 
 const App = (props) => {
+    debugger;
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar state = { props.state.sidebar } />
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' render = { () => <Profile state = { props.state.profilePage } dispatch={props.dispatch} />}/>
-                    <Route path='/dialogs' render = { () => <Dialogs state = { props.state.dialogPage } dispatch={props.dispatch} />}/>
+                    <Route path='/profile' render = { () => <Profile store={props.store} />}/>
+                    <Route path='/dialogs' render = { () => <Dialogs store={props.store} />}/>
                 </div>
             </div>
         </BrowserRouter>
