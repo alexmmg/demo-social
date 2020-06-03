@@ -11,7 +11,8 @@
     "react-scripts": "3.4.1",
     "react-router-dom": "latest",
     "redux": "latest",
-    "react-redux": "latest"
+    "react-redux": "latest",
+    "axios": "latest"
   },
   "scripts": {
     "start": "react-scripts start",

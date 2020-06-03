@@ -5,39 +5,39 @@ const SET_USERS = 'SET_USERS';
 
 let initialState = {
     users: [
-        {
-            id: '1',
-            fullName: "Dmitry",
-            followed: true,
-            photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-            status: 'I"m a boss',
-            location: {
-                city: 'Minsk',
-                country: 'Belarus'
-            }
-        },
-        {
-            id: "2",
-            fullName: "Sasha",
-            followed: false,
-            photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-            status: 'I"m a boss too',
-            location: {
-                city: 'Moscow',
-                country: 'Russia'
-            }
-        },
-        {
-            id: "3",
-            fullName: "Milan",
-            followed: true,
-            photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-            status: 'I"m a real boss',
-            location: {
-                city: 'Khmelnitsky',
-                country: 'Ukraine'
-            }
-        },
+    //     {
+    //         id: '1',
+    //         fullName: "Dmitry",
+    //         followed: true,
+    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
+    //         status: 'I"m a boss',
+    //         location: {
+    //             city: 'Minsk',
+    //             country: 'Belarus'
+    //         }
+    //     },
+    //     {
+    //         id: "2",
+    //         fullName: "Sasha",
+    //         followed: false,
+    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
+    //         status: 'I"m a boss too',
+    //         location: {
+    //             city: 'Moscow',
+    //             country: 'Russia'
+    //         }
+    //     },
+    //     {
+    //         id: "3",
+    //         fullName: "Milan",
+    //         followed: true,
+    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
+    //         status: 'I"m a real boss',
+    //         location: {
+    //             city: 'Khmelnitsky',
+    //             country: 'Ukraine'
+    //         }
+    //     },
     ]
 };
 
