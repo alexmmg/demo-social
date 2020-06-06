@@ -1,44 +1,15 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 
 let initialState = {
-    users: [
-    //     {
-    //         id: '1',
-    //         fullName: "Dmitry",
-    //         followed: true,
-    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-    //         status: 'I"m a boss',
-    //         location: {
-    //             city: 'Minsk',
-    //             country: 'Belarus'
-    //         }
-    //     },
-    //     {
-    //         id: "2",
-    //         fullName: "Sasha",
-    //         followed: false,
-    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-    //         status: 'I"m a boss too',
-    //         location: {
-    //             city: 'Moscow',
-    //             country: 'Russia'
-    //         }
-    //     },
-    //     {
-    //         id: "3",
-    //         fullName: "Milan",
-    //         followed: true,
-    //         photoUrl: 'https://www.shareicon.net/data/512x512/2016/08/04/806683_man_512x512.png',
-    //         status: 'I"m a real boss',
-    //         location: {
-    //             city: 'Khmelnitsky',
-    //             country: 'Ukraine'
-    //         }
-    //     },
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 21,
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -66,7 +37,13 @@ const usersReducer = (state = initialState, action) => {
             }
         }
         case SET_USERS: {
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.totalUsersCount}
         }
         default:
             return state;
@@ -76,6 +53,8 @@ const usersReducer = (state = initialState, action) => {
 export let followAC = (userId) => ({type: FOLLOW, userId});
 export let unfollowAC = (userId) => ({type: UNFOLLOW, userId});
 export let setUsersAC = (users) => ({type: SET_USERS, users});
+export let setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export let setTotalUsersCountAC = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
 
 
 export default usersReducer;
