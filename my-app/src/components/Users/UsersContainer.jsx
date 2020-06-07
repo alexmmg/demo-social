@@ -10,7 +10,8 @@ import {
     unfollowAC
 } from "../../redux/usersReducer";
 import * as axios from 'axios';
-import loader from './../../assets/images/loader.gif';
+import Preloader from "../common/Preloader/Preloader";
+
 
 class UsersComponent extends React.Component {
 
@@ -36,7 +37,9 @@ class UsersComponent extends React.Component {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={loader}/> : null}
+            {this.props.isFetching ?
+                <Preloader/>
+                : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
