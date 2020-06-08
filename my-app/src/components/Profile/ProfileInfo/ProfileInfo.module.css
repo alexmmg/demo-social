@@ -3,5 +3,9 @@
 }
 
 .avatar {
-    width: 50px;
+    width: 150px;
+}
+
+.fullName, .aboutMe {
+    padding: 10px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import s from './User.module.css'
 import userPhoto from './../../assets/images/user.png'
+import {NavLink} from "react-router-dom";
 
 let Users = (props) => {
 
@@ -16,15 +17,15 @@ let Users = (props) => {
             <div>
                 {pages.map(p => {
                     return <span className={props.currentPage === p && s.selectedPage}
-                                 onClick={(e) => {
-                                     props.onPageChanged(p)
-                                 }}>{p}</span>
+                                 onClick={(e) => { props.onPageChanged(p)}}>{p}</span>
                 })}
             </div>
-            {props.users.map(u => <div key={u.id}>
+                    {props.users.map(u => <div key={u.id}>
                     <span>
                        <div>
+                       <NavLink to={"/profile" + "/" + u.id}>
                            <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.photo}/>
+                       </NavLink>
                        </div>
                         <div>
                             {u.followed
