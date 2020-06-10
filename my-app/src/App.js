@@ -7,6 +7,8 @@ import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 const App = (props) => {
@@ -14,7 +16,7 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header/>
+                <HeaderContainer store={props.store} />
                 <Navbar store={props.store}/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer store={props.store}/>}/>
