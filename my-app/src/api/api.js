@@ -7,3 +7,4 @@ export const getUsers = (currentPage = 1, pageSize = 10) => {
             return response.data})
 };
 
+// export const getMyAccount = (currentPage = 1, pageSize = 10) => {
