@@ -19,10 +19,12 @@ let Users = (props) => {
             <div>
                 {pages.map(p => {
                     return <span className={props.currentPage === p && s.selectedPage}
-                                 onClick={(e) => { props.onPageChanged(p)}}>{p}</span>
+                                 onClick={(e) => {
+                                     props.onPageChanged(p)
+                                 }}>{p}</span>
                 })}
             </div>
-                    {props.users.map(u => <div key={u.id}>
+            {props.users.map(u => <div key={u.id}>
                     <span>
                        <div>
                        <NavLink to={"/profile" + "/" + u.id}>
@@ -31,20 +33,24 @@ let Users = (props) => {
                        </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
                                     userAPI.unfollowUser(u.id).then((response) => {
-                                            if (response.data.resultCode === 0){
-                                                props.unfollow(u.id)
-                                            }
-                                        });
+                                        if (response.data.resultCode === 0) {
+                                            props.unfollow(u.id)
+                                        }
+                                        props.toggleFollowingProgress(false, u.id);
+                                    });
                                 }}>Follow</button>
 
-                                : <button onClick={() => {
+                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true, u.id);
                                     userAPI.followUser(u.id).then((response) => {
-                                            if (response.data.resultCode === 0){
-                                                props.follow(u.id)
-                                            }
-                                        });
+                                        if (response.data.resultCode === 0) {
+                                            props.follow(u.id)
+                                        }
+                                        props.toggleFollowingProgress(false, u.id);
+                                    });
 
 
                                 }}>Unfollow</button>}
