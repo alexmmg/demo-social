@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    follow,
+    follow, followUser, getUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleFollowingProgress,
@@ -16,21 +16,17 @@ import {userAPI} from "../../api/api";
 class UsersComponent extends React.Component {
 
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        userAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount)
-            })
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     };
 
     onPageChanged = (pageNumber) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        userAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items)
-            })
+        this.props.getUsers(pageNumber, this.props.pageSize);
+        // this.props.setCurrentPage(pageNumber);
+        // this.props.toggleIsFetching(true);
+        // userAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
+        //         this.props.toggleIsFetching(false);
+        //         this.props.setUsers(data.items)
+        //     })
     };
 
     render() {
@@ -47,6 +43,7 @@ class UsersComponent extends React.Component {
                    unfollow={this.props.unfollow}
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
+                   followUser={this.props.followUser}
             />
         </>
     }
@@ -89,6 +86,6 @@ let mapStateToProps = (state) => {
 
 
 const DialogsContainer = connect(mapStateToProps,
-    {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress})(UsersComponent);
+    {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers, followUser})(UsersComponent);
 
 export default DialogsContainer;

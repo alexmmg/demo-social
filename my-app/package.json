@@ -12,7 +12,8 @@
     "react-router-dom": "latest",
     "redux": "latest",
     "react-redux": "latest",
-    "axios": "latest"
+    "axios": "latest",
+    "redux-thunk": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
