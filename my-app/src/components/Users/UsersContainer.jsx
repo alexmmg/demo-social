@@ -2,7 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-    follow, followUser, getUsers,
+    follow, followUser, unfollowUser,
+    getUsers,
     setCurrentPage,
     setTotalUsersCount,
     setUsers, toggleFollowingProgress,
@@ -44,6 +45,7 @@ class UsersComponent extends React.Component {
                    toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
                    followUser={this.props.followUser}
+                   unfollowUser={this.props.unfollowUser}
             />
         </>
     }
@@ -86,6 +88,6 @@ let mapStateToProps = (state) => {
 
 
 const DialogsContainer = connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers, followUser})(UsersComponent);
+    {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers, followUser, unfollowUser})(UsersComponent);
 
 export default DialogsContainer;
