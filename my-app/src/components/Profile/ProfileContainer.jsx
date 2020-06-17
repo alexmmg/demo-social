@@ -20,13 +20,14 @@ class ProfileContainer extends React.Component {
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} getProfile={this.props.getProfile}/>
+            <Profile {...this.props} profile={this.props.profile} getProfile={this.props.getProfile} isAuth={this.props.isAuth}/>
         )
     }
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 });
 
 let WithUrlDataContainerComponent = withRouter(ProfileContainer);
