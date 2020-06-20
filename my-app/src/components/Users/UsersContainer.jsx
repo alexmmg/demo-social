@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useDebugValue} from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
@@ -12,6 +12,10 @@ import {
 } from "../../redux/usersReducer";
 import Preloader from "../common/Preloader/Preloader";
 import {userAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {getProfile, setUserProfile} from "../../redux/profileReducer";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 
 class UsersComponent extends React.Component {
@@ -86,8 +90,15 @@ let mapStateToProps = (state) => {
 //     }
 // };
 
+export default compose (
+    withAuthRedirect,
+    connect(mapStateToProps, {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers})
+) (UsersComponent);
 
-const DialogsContainer = connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers, followUser, unfollowUser})(UsersComponent);
+//followUser, unfollowUser
 
-export default DialogsContainer;
+//
+// const DialogsContainer = connect(mapStateToProps,
+//     {follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers, followUser, unfollowUser})(UsersComponent);
+//
+// export default DialogsContainer;

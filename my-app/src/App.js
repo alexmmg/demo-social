@@ -13,7 +13,6 @@ import Login from "./components/Login/Login";
 
 
 const App = (props) => {
-    debugger;
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
@@ -22,7 +21,7 @@ const App = (props) => {
                 <div className='app-wrapper-content'>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer store={props.store}/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer store={props.store}/>}/>
                     <Route path='/login' render={() => <Login />}/>
 
                 </div>

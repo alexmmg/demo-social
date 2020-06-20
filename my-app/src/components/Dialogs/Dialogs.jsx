@@ -6,7 +6,6 @@ import Redirect from "react-router-dom/es/Redirect";
 
 
 const Dialogs = (props) => {
-    debugger
 
     let dialogs = props.state.dialogs.map( (dialog) => ( <DialogItem name = {dialog.name} id = {dialog.id} />));
     let message = props.state.messages.map( (message) => ( <Message text = {message.message} />));
@@ -21,8 +20,6 @@ const Dialogs = (props) => {
         let text = messageText.current.value;
         props.updateNewMessageText(text);
     };
-
-    if(!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div>
