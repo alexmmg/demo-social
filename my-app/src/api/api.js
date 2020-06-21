@@ -15,15 +15,28 @@ export const userAPI = {
             })
     },
     getMyAccount() {
-        return instance.get(`auth/me`)
+        return instance.get(`auth/me`);
     },
     unfollowUser(userId) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete(`follow/${userId}`);
     },
     followUser(userId) {
-        return instance.post(`follow/${userId}`, {})
+        return instance.post(`follow/${userId}`, {});
     },
     getProfile(userId) {
-        return instance.get(`profile/` + userId)
+        console.warn('Use profileAPI method instead');
+        return profileAPI.getProfile(userId);
     }
+};
+
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/` + userId);
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/` + userId);
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status/`, {status: status});
+    },
 };
