@@ -13,7 +13,8 @@
     "redux": "latest",
     "react-redux": "latest",
     "axios": "latest",
-    "redux-thunk": "latest"
+    "redux-thunk": "latest",
+    "redux-form": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
