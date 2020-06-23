@@ -40,3 +40,9 @@ export const profileAPI = {
         return instance.put(`profile/status/`, {status: status});
     },
 };
+
+export const loginAPI = {
+    sendLogin(userId) {
+        return instance.post(`profile/` + userId);
+    }
+};
