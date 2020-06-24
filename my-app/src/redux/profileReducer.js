@@ -1,8 +1,6 @@
 import {profileAPI, userAPI} from "../api/api";
-import {setTotalUsersCount, setUsers, toggleIsFetching} from "./usersReducer";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -39,7 +37,7 @@ const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                title: state.newPostText,
+                title: action.newPostText,
                 src: "https://s3.tproger.ru/uploads/2020/05/IMG_8715-50x50.png",
                 likesCount: '0'
             };
@@ -47,12 +45,6 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, newPost],
                 newPostText: ''
-            }
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText
             }
         }
         case SET_STATUS: {
@@ -69,9 +61,7 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
-export let addPostActionCreator = () => ({type: ADD_POST});
-
-export let updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export let addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 
 export let setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
