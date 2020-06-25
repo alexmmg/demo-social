@@ -4,6 +4,7 @@ import Post from "./Post/Post"
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
 import reduxForm from "redux-form/lib/immutable/reduxForm";
 import Field from "redux-form/lib/Field";
+import {maxLengthCreator, required} from "../../../utils/validators/validators";
 
 
 const MyPosts = (props) => {
@@ -32,11 +33,13 @@ const MyPosts = (props) => {
     )
 };
 
+let maxLength30 = maxLengthCreator(30);
+
 const PostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component="input" type="text" name={"newPostText"}/>
+                <Field component="input" type="text" name={"newPostText"} validate={[required, maxLength30 ]} />
             </div>
             <div>
                 <button>Add post</button>

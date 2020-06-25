@@ -24,7 +24,7 @@ const LoginForm = (props) => {
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const sendAuthData = (formData) => {
-    console.log(formData.);
+    console.log(formData);
 };
 
 const Login = (props) => {
