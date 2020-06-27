@@ -3,18 +3,22 @@ import reduxForm from "redux-form/lib/immutable/reduxForm";
 import Field from "redux-form/lib/Field";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import connect from "react-redux/lib/connect/connect";
+import {login} from "../../redux/auth-reducer";
+import Redirect from "react-router-dom/es/Redirect";
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"Login"} name={"login"} component={Input} validate={[required]}/>
+                <Field placeholder={"email"} name={"email"} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} component={Input} validate={[required]}/>
+                <Field placeholder={"Password"} name={"password"} component={Input} validate={[required]}
+                       type={"password"}/>
             </div>
             <div>
-                <Field type="checkbox" name={"checkbox"} component={Input} placeholder={"Remember me"}/>
+                <Field type="checkbox" name={"rememberMe"} component={Input} />
             </div>
             <div>
                 <button>Login</button>
@@ -25,16 +29,26 @@ const LoginForm = (props) => {
 
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
-const sendAuthData = (formData) => {
-    console.log(formData);
-};
 
 const Login = (props) => {
+
+    const sendAuthData = (formData) => {
+        props.login(formData.email, formData.password, formData.rememberMe);
+    };
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"} />
+    }
+
     return <div>
         <h1> Login </h1>
-        <LoginReduxForm onSubmit={sendAuthData} />
+        <LoginReduxForm onSubmit={sendAuthData}/>
     </div>
 };
 
 
-export default Login;
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+});
+
+export default connect(mapStateToProps, {login})(Login);

@@ -14,9 +14,6 @@ export const userAPI = {
                 return response.data
             })
     },
-    getMyAccount() {
-        return instance.get(`auth/me`);
-    },
     unfollowUser(userId) {
         return instance.delete(`follow/${userId}`);
     },
@@ -41,8 +38,14 @@ export const profileAPI = {
     },
 };
 
-export const loginAPI = {
-    sendLogin(userId) {
-        return instance.post(`profile/` + userId);
+export const authAPI = {
+    getMyAccount() {
+        return instance.get(`auth/me`);
+    },
+    login(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe});
+    },
+    logout() {
+        return instance.delete(`auth/login`);
     }
 };
