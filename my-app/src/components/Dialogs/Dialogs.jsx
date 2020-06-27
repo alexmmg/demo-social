@@ -7,6 +7,8 @@ import {reducer as formReducer} from 'redux-form'
 import reduxForm from "redux-form/lib/immutable/reduxForm";
 import Field from "redux-form/lib/Field";
 import handleSubmit from "redux-form/lib/handleSubmit";
+import {Textarea} from "../common/FormsControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 
 const Dialogs = (props) => {
@@ -34,11 +36,13 @@ const Dialogs = (props) => {
     )
 };
 
+const maxLength100 = maxLengthCreator(100);
+
 const DialogForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component="textarea" placeholder="Enter your message" name={"messageInput"} />
+                <Field component={Textarea} validate={[required, maxLength100]} placeholder="Enter your message" name={"messageInput"} />
             </div>
             <div>
                 <button>Write Message</button>
