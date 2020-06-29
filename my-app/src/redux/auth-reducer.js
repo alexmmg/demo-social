@@ -1,5 +1,4 @@
-import {authAPI, userAPI} from "../api/api";
-import {setUserProfile} from "./profileReducer";
+import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
@@ -33,7 +32,7 @@ export const getMyAccount = () => {
         authAPI.getMyAccount().then((response) => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data;
-                dispatch(setAuthUserData(id, email, login, true));
+                dispatch(setAuthUserData(id, email, login,  true));
             }
         })
     }

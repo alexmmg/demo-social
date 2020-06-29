@@ -1,34 +1,52 @@
-import React from 'react';
-import Header from './components/Header/Header'
+import React, {Component} from 'react';
 import Navbar from './components/Navbar/Navbar'
 import './App.css';
-import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import connect from "react-redux/lib/connect/connect";
+import {withRouter} from "react-router-dom";
+import {compose} from "redux";
+import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./components/common/Preloader/Preloader";
 
 
-const App = (props) => {
-    return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <HeaderContainer store={props.store} />
-                <Navbar store={props.store}/>
-                <div className='app-wrapper-content'>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer store={props.store}/>}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
-                    <Route path='/users' render={() => <UsersContainer store={props.store}/>}/>
-                    <Route path='/login' render={() => <Login store={props.store}/>}/>
+class App extends Component {
 
+    componentDidMount() {
+        this.props.initializeApp();
+    };
+
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+        return (
+            <BrowserRouter>
+                <div className='app-wrapper'>
+                    <HeaderContainer store={this.props.store}/>
+                    <Navbar store={this.props.store}/>
+                    <div className='app-wrapper-content'>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer store={this.props.store}/>}/>
+                        <Route path='/dialogs' render={() => <DialogsContainer store={this.props.store}/>}/>
+                        <Route path='/users' render={() => <UsersContainer store={this.props.store}/>}/>
+                        <Route path='/login' render={() => <Login store={this.props.store}/>}/>
+
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
-    );
-};
+            </BrowserRouter>
+        );
+    }
+}
 
 
-export default App;
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+});
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {initializeApp}))(App);

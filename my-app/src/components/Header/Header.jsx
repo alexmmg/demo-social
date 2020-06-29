@@ -3,7 +3,6 @@ import s from "./Header.module.css"
 import {NavLink} from "react-router-dom";
 
 const Header = (props) => {
-    debugger
     return (
         <header className={s.header}>
             <img alt="Company Logo" src='https://upload.wikimedia.org/wikipedia/commons/2/29/HP_New_Logo_2D.svg'/>
