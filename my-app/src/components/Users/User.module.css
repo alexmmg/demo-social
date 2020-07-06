@@ -2,10 +2,6 @@
     width: 100px;
 }
 
-.selectedPage {
-    font-weight: bold;
-}
-
 .pageNum {
     margin-right: 5px;
     cursor: pointer;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post"
 import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profileReducer";
@@ -8,7 +8,7 @@ import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo( (props) => {
 
     let post = props.posts.map((el) => (<Post title={el.title} src={el.src} likesCount={el.likesCount}/>));
 
@@ -22,8 +22,8 @@ const MyPosts = (props) => {
         props.addPost(value.newPostText);
     };
 
-
     return (
+
         <div className={s.postsBlock}>
             <h3>My post</h3>
             <PostReduxForm onSubmit={addPost} />
@@ -32,7 +32,7 @@ const MyPosts = (props) => {
             </div>
         </div>
     )
-};
+});
 
 let maxLength30 = maxLengthCreator(30);
 

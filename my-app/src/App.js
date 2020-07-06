@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './components/Navbar/Navbar'
 import './App.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -25,7 +25,6 @@ class App extends Component {
             return <Preloader/>
         }
         return (
-            <BrowserRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer store={this.props.store}/>
                     <Navbar store={this.props.store}/>
@@ -37,7 +36,6 @@ class App extends Component {
 
                     </div>
                 </div>
-            </BrowserRouter>
         );
     }
 }
