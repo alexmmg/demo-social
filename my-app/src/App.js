@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, Suspense} from 'react';
 import Navbar from './components/Navbar/Navbar'
 import './App.css';
 import {Route} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -12,6 +10,10 @@ import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
+
+
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
 
 class App extends Component {
@@ -25,21 +27,24 @@ class App extends Component {
             return <Preloader/>
         }
         return (
-                <div className='app-wrapper'>
-                    <HeaderContainer store={this.props.store}/>
-                    <Navbar store={this.props.store}/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer store={this.props.store}/>}/>
-                        <Route path='/dialogs' render={() => <DialogsContainer store={this.props.store}/>}/>
-                        <Route path='/users' render={() => <UsersContainer store={this.props.store}/>}/>
-                        <Route path='/login' render={() => <Login store={this.props.store}/>}/>
+            <div className='app-wrapper'>
+                <HeaderContainer store={this.props.store}/>
+                <Navbar store={this.props.store}/>
+                <div className='app-wrapper-content'>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer store={this.props.store}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer store={this.props.store}/>}/>
+                    <Route path='/users' render={() =>
+                        <Suspense fallback={"Loading..."}>
+                            <UsersContainer store={this.props.store}/>
+                        </Suspense>
+                    }/>
+                    <Route path='/login' render={() => <Login store={this.props.store}/>}/>
 
-                    </div>
                 </div>
+            </div>
         );
     }
 }
-
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized
