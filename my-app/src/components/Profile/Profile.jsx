@@ -9,7 +9,8 @@ import Redirect from "react-router-dom";
 const Profile = (props) => {
     return (
         <div className={s.content}>
-            <ProfileInfo profile={props.profile} getProfile={props.getProfile} status={props.status} updateStatus={props.updateStatus} />
+            <ProfileInfo isOwner={props.isOwner} profile={props.profile} getProfile={props.getProfile} status={props.status}
+                         updateStatus={props.updateStatus} savePhoto={props.savePhoto}/>
             <MyPostsContainer store={props.store} />
         </div>
     )
