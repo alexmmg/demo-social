@@ -7,5 +7,10 @@
 }
 
 .fullName, .aboutMe {
-    padding: 10px;
+    margin: 10px 20px;
 }
+
+.contact {
+    padding-left: 10px;
+}
+

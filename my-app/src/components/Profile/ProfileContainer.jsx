@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component {
             this.refreshProfile();
         }
 
-        // this.refreshProfile();
+        this.refreshProfile();
     }
 
     render() {
