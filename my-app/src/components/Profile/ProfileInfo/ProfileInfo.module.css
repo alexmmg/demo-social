@@ -14,3 +14,8 @@
     padding-left: 10px;
 }
 
+.formSummaryError {
+    border: red 1px solid;
+    color: red;
+    padding: 10px;
+}

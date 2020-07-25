@@ -2,6 +2,10 @@
     font-weight: bold;
 }
 
+.pointer, button {
+    cursor: pointer;
+}
+
 .paginator {
     margin: 10px;
 }

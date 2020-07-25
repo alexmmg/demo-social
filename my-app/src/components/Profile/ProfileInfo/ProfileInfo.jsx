@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from "./ProfileStatus"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from './../../../assets/images/user.png'
+import ProfileDataFormReduxForm from "./ProfileDataForm";
 import ProfileDataForm from "./ProfileDataForm";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
 
     let [editMode, setEditMode] = useState(false);
 
@@ -20,6 +20,21 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
         }
     };
 
+    const onSubmit = (formData) => {
+        saveProfile(formData).then(() => {
+            setEditMode(false);
+        });
+    };
+
+    // const initialValues = {aboutMe:"Sasha111",
+    //     contacts:{facebook:null, website:null,vk: "www.vk.com",twitter:null,instagram:null,youtube:null,github:null,mainLink:null},
+    //     lookingForAJob:false,
+    //     lookingForAJobDescription:"poiuy",
+    //     fullName:"m,nbv",
+    //     userId:8704,
+    //     photos:{small: null,
+    //         large: null}};
+
     return (
         <div>
             <div className={s.descriptionBlock}>
@@ -29,7 +44,8 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
             </div>
 
             {editMode
-                ? <ProfileDataForm profile={profile}/>
+
+                ? <ProfileDataFormReduxForm profile={profile} onSubmit={onSubmit} initialvalues={profile}/>
                 : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                     setEditMode(true)
                 }}/>}
@@ -45,7 +61,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             <button onClick={goToEditMode}>edit</button>
         </div>}
         <div className={s.fullName}>
-            <span><b>Full name:</b>{profile.fullName}</span>
+            <span><b>Full name: </b>{profile.fullName}</span>
         </div>
         <div>
             <div>
@@ -57,7 +73,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             </div>
             }
             <div>
-                <b>About me:</b> {profile.lookingForAJob}
+                <b>About me:</b> {profile.aboutMe}
             </div>
             <div>
                 <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
@@ -67,9 +83,6 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
 
         </div>
 
-        <div>
-            <span className={s.aboutMe}>{profile.aboutMe}</span>
-        </div>
     </div>
 };
 

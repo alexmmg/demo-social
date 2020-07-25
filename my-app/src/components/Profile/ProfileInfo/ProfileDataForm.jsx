@@ -1,16 +1,21 @@
 import React from "react";
-import s from "./ProfileInfo.module.css";
-import {createField, Input} from "../../common/FormsControls/FormsControls";
+import {createField, Input, Textarea} from "../../common/FormsControls/FormsControls";
 import reduxForm from "redux-form/lib/immutable/reduxForm";
+import s from "./ProfileInfo.module.css"
 
-const ProfileDataForm = ({profile}) => {
-    return <form>
+
+const ProfileDataForm = ({handleSubmit, profile, error}) => {
+
+    // console.log(initialValues);
+
+    return <form onSubmit={handleSubmit}>
         <div>
-            <button onClick={() => {
-            }}>save
-            </button>
+            <button>save</button>
         </div>
-        <div className={s.fullName}>
+        {error && <div className={s.formSummaryError}>
+            {error}
+        </div>}
+        <div>
             <span><b>Full name:</b></span> {createField("Full name", "fullName", [], Input)}
         </div>
         <div>
@@ -18,28 +23,28 @@ const ProfileDataForm = ({profile}) => {
                 <b>Looking for a job:</b>
                 {createField("", "lookingForAJob", [], Input, {type: "checkbox"})}
             </div>
-            {profile.lookingForAJob &&
             <div>
-                <b>My professional skills:</b> {createField("Professional skills", "lookingForAJobf", [], Input)}
+                <b>My professional skills:</b>
+                {createField("My professional skills", "lookingForAJobDescription", [], Textarea)}
             </div>
-            }
             <div>
-                <b>About me:</b> {profile.lookingForAJob}
+                <b>About me:</b>
+                {createField("About me", "aboutMe", [], Textarea)}
             </div>
-            {/*<div>*/}
-            {/*    <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {*/}
-            {/*    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>*/}
-            {/*})}*/}
-            {/*</div>*/}
-
+            <div>
+                <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
+                return <div className={s.contact}>
+                    <b>{key}: {createField(key, "contacts." + key, [], Input)}</b>
+                </div>
+            })}
+            </div>
         </div>
 
-        <div>
-            <span className={s.aboutMe}>{profile.aboutMe}</span>
-        </div>
     </form>
 };
 
+
 const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm);
+
 
 export default ProfileDataFormReduxForm;

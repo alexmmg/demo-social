@@ -1,5 +1,5 @@
 import React from "react";
-import Redirect from "react-router-dom/es/Redirect";
+import {Redirect} from "react-router-dom";
 import {getProfile, setUserProfile} from "../redux/profileReducer";
 import connect from "react-redux/lib/connect/connect";
 

@@ -2,19 +2,16 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import Redirect from "react-router-dom/es/Redirect";
-import {reducer as formReducer} from 'redux-form'
 import reduxForm from "redux-form/lib/immutable/reduxForm";
 import Field from "redux-form/lib/Field";
-import handleSubmit from "redux-form/lib/handleSubmit";
 import {Textarea} from "../common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 
 
 const Dialogs = (props) => {
 
-    let dialogs = props.state.dialogs.map((dialog) => (<DialogItem name={dialog.name} id={dialog.id}/>));
-    let message = props.state.messages.map((message) => (<Message text={message.message}/>));
+    let dialogs = props.state.dialogs.map((dialog) => (<DialogItem key={dialog.id} name={dialog.name} id={dialog.id}/>));
+    let message = props.state.messages.map((message) => (<Message key={message.id} text={message.message}/>));
 
     let addNewMessage = (values) => {
         props.addMessage(values.messageInput);
