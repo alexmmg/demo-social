@@ -45,7 +45,7 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, savePro
 
             {editMode
 
-                ? <ProfileDataFormReduxForm profile={profile} onSubmit={onSubmit} initialvalues={profile}/>
+                ? <ProfileDataFormReduxForm profile={profile} onSubmit={onSubmit} initialValues={profile}/>
                 : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                     setEditMode(true)
                 }}/>}

@@ -44,7 +44,7 @@ const ProfileDataForm = ({handleSubmit, profile, error}) => {
 };
 
 
-const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm);
+const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile', enableReinitialize : true})(ProfileDataForm);
 
 
 export default ProfileDataFormReduxForm;
