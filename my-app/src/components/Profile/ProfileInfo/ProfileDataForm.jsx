@@ -6,7 +6,6 @@ import s from "./ProfileInfo.module.css"
 
 const ProfileDataForm = ({handleSubmit, profile, error}) => {
 
-    // console.log(initialValues);
 
     return <form onSubmit={handleSubmit}>
         <div>
@@ -44,7 +43,7 @@ const ProfileDataForm = ({handleSubmit, profile, error}) => {
 };
 
 
-const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile', enableReinitialize : true})(ProfileDataForm);
+const ProfileDataFormReduxForm = reduxForm({form: 'edit-profile'})(ProfileDataForm);
 
 
 export default ProfileDataFormReduxForm;

@@ -35,6 +35,8 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
     )
 };
 
+
+
 const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 
